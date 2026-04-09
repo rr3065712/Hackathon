@@ -1,0 +1,9 @@
+{
+  "name": "smart-city-grievance",
+  "version": "1.0.0",
+  "description": "Smart City Grievance Redressal App",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node backend/server.js"
+  }
+}
