@@ -1,0 +1,302 @@
+{
+  "users": [
+    {
+      "_id": "6km3vggu0",
+      "phone": "544444444",
+      "password": "ghdtddhgfhjf",
+      "name": "dtdtrd",
+      "role": "user",
+      "isGuest": false
+    },
+    {
+      "_id": "cronhqm3x",
+      "phone": "8861909062",
+      "password": "Raki@2005",
+      "name": "System Admin",
+      "role": "admin",
+      "isGuest": false
+    },
+    {
+      "_id": "57v4desgl",
+      "phone": "guest_1775670919231",
+      "name": "Guest User",
+      "role": "user",
+      "isGuest": true
+    },
+    {
+      "_id": "01gp61pl7",
+      "phone": "5585568553",
+      "password": "Ashoka@2005",
+      "name": "ashu",
+      "role": "user",
+      "isGuest": false
+    },
+    {
+      "_id": "c0mzorecl",
+      "phone": "guest_1775671838786",
+      "name": "Guest User",
+      "role": "user",
+      "isGuest": true
+    },
+    {
+      "_id": "w6i8h3kwa",
+      "phone": "1234567897",
+      "password": "Ashoka@2005",
+      "name": "as",
+      "role": "user",
+      "isGuest": false
+    },
+    {
+      "_id": "4vksmzxwv",
+      "phone": "admin",
+      "password": "password",
+      "name": "System Admin",
+      "role": "admin"
+    },
+    {
+      "_id": "h4bqg8hgu",
+      "phone": "guest_1775673859911",
+      "name": "Guest User",
+      "role": "user",
+      "isGuest": true
+    },
+    {
+      "_id": "18xtdsu7u",
+      "phone": "1111111111",
+      "password": "Ashu@2005",
+      "name": "raki",
+      "role": "user",
+      "isGuest": false
+    }
+  ],
+  "complaints": [
+    {
+      "_id": "78urrztpo",
+      "userId": "6km3vggu0",
+      "title": "chgkhkjdhqkhd",
+      "description": "scbabcka",
+      "category": "Other",
+      "priority": "Low",
+      "status": "Pending",
+      "location": {
+        "lat": null,
+        "lng": null
+      },
+      "imageUrl": "/api/uploads/1775668655179-for red.png",
+      "adminComment": "",
+      "createdAt": "2026-04-08T17:17:35.998Z",
+      "upvotes": [
+        "18xtdsu7u"
+      ]
+    },
+    {
+      "_id": "mbgs7i2lk",
+      "userId": "c0mzorecl",
+      "title": "pathhole",
+      "description": "vjsdbe, ",
+      "category": "Other",
+      "priority": "Low",
+      "status": "Resolved",
+      "location": {
+        "lat": 13.167763,
+        "lng": 77.557386
+      },
+      "imageUrl": "/api/uploads/1775672117559-for.png",
+      "createdAt": "2026-04-08T18:15:18.382Z",
+      "upvotes": [
+        "18xtdsu7u"
+      ],
+      "comments": [],
+      "statusHistory": [
+        {
+          "status": "Pending",
+          "timestamp": "2026-04-08T18:15:18.382Z"
+        },
+        {
+          "status": "In Progress",
+          "department": "Roads & Highways",
+          "timestamp": "2026-04-08T19:09:21.607Z"
+        },
+        {
+          "status": "Resolved",
+          "department": "Roads & Highways",
+          "timestamp": "2026-04-09T05:04:23.704Z"
+        }
+      ],
+      "department": "Roads & Highways"
+    },
+    {
+      "_id": "4fw7osjf1",
+      "userId": "c0mzorecl",
+      "title": "garbage",
+      "description": "dnlk nlk ",
+      "category": "Garbage",
+      "priority": "Low",
+      "status": "Resolved",
+      "location": {
+        "lat": 13.167763,
+        "lng": 77.557386
+      },
+      "imageUrl": "/api/uploads/1775672195736-IMG-20250701-WA0006.jpg",
+      "createdAt": "2026-04-08T18:16:36.544Z",
+      "upvotes": [],
+      "comments": [],
+      "statusHistory": [
+        {
+          "status": "Pending",
+          "timestamp": "2026-04-08T18:16:36.544Z"
+        },
+        {
+          "status": "Pending",
+          "department": "None",
+          "timestamp": "2026-04-08T19:09:23.824Z"
+        },
+        {
+          "status": "Resolved",
+          "department": "None",
+          "timestamp": "2026-04-08T19:09:31.246Z"
+        }
+      ],
+      "department": "None"
+    },
+    {
+      "_id": "7r3t4ab8k",
+      "userId": "c0mzorecl",
+      "title": "water",
+      "description": "b,jk vvv s ",
+      "category": "Water",
+      "priority": "Low",
+      "status": "Assigned",
+      "location": {
+        "lat": 13.16755,
+        "lng": 77.556747
+      },
+      "imageUrl": "/api/uploads/1775672252219-for red.png",
+      "createdAt": "2026-04-08T18:17:33.037Z",
+      "upvotes": [
+        "18xtdsu7u"
+      ],
+      "comments": [
+        {
+          "text": "jhbkjshsvhd",
+          "authorName": "Guest User",
+          "timestamp": "2026-04-08T18:44:37.325Z"
+        },
+        {
+          "text": "dff",
+          "authorName": "Guest User",
+          "timestamp": "2026-04-08T18:44:49.753Z"
+        }
+      ],
+      "statusHistory": [
+        {
+          "status": "Pending",
+          "timestamp": "2026-04-08T18:17:33.037Z"
+        },
+        {
+          "status": "Assigned",
+          "department": "Water Board",
+          "timestamp": "2026-04-08T19:07:25.674Z"
+        }
+      ],
+      "department": "Water Board"
+    },
+    {
+      "_id": "pssnhmazy",
+      "userId": "18xtdsu7u",
+      "title": "toilet",
+      "description": "vvbvhshvhwkhkw",
+      "category": "Other",
+      "priority": "Low",
+      "status": "In Progress",
+      "location": {
+        "lat": null,
+        "lng": null
+      },
+      "imageUrl": "/api/uploads/1775675831372-IMG-20250701-WA0005.jpg",
+      "createdAt": "2026-04-08T19:17:12.201Z",
+      "upvotes": [
+        "18xtdsu7u"
+      ],
+      "comments": [],
+      "statusHistory": [
+        {
+          "status": "Pending",
+          "timestamp": "2026-04-08T19:17:12.201Z"
+        },
+        {
+          "status": "In Progress",
+          "department": "Sanitation",
+          "timestamp": "2026-04-08T19:41:07.628Z"
+        }
+      ],
+      "department": "Sanitation"
+    },
+    {
+      "_id": "dufgcaomm",
+      "userId": "18xtdsu7u",
+      "title": "electricity",
+      "description": "sffgeggwe",
+      "category": "Electricity",
+      "priority": "Low",
+      "status": "Assigned",
+      "location": {
+        "lat": null,
+        "lng": null
+      },
+      "imageUrl": "/api/uploads/1775677203506-IMG-20250701-WA0005.jpg",
+      "createdAt": "2026-04-08T19:40:04.315Z",
+      "upvotes": [
+        "18xtdsu7u"
+      ],
+      "comments": [],
+      "statusHistory": [
+        {
+          "status": "Pending",
+          "timestamp": "2026-04-08T19:40:04.315Z"
+        },
+        {
+          "status": "Assigned",
+          "department": "Power Grid",
+          "timestamp": "2026-04-08T19:40:59.559Z"
+        }
+      ],
+      "department": "Power Grid"
+    },
+    {
+      "_id": "cynuuaa9q",
+      "userId": "18xtdsu7u",
+      "title": "garbage",
+      "description": "vcjabvch",
+      "category": "Garbage",
+      "priority": "Low",
+      "status": "Resolved",
+      "location": {
+        "lat": 13.16709975,
+        "lng": 77.55686175000001
+      },
+      "imageUrl": "/api/uploads/1775710953799-for.png",
+      "createdAt": "2026-04-09T05:02:34.611Z",
+      "upvotes": [],
+      "comments": [],
+      "statusHistory": [
+        {
+          "status": "Pending",
+          "timestamp": "2026-04-09T05:02:34.611Z"
+        },
+        {
+          "status": "Assigned",
+          "department": "Sanitation",
+          "timestamp": "2026-04-09T05:04:14.648Z"
+        },
+        {
+          "status": "Resolved",
+          "department": "Sanitation",
+          "timestamp": "2026-04-09T05:23:51.451Z"
+        }
+      ],
+      "department": "Sanitation",
+      "proofImageUrl": "/api/uploads/1775712231434-w4.jpg"
+    }
+  ]
+}

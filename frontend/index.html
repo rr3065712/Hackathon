@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Smart City Grievance App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div id="app-container">
+        <!-- Auth View -->
+        <section id="view-auth" class="view active">
+            <div class="auth-box">
+                <div class="logo">🏙️ SmartCity</div>
+                <h2>Welcome Back</h2>
+                <p>Login to your account</p>
+                <form id="login-form">
+                    <input type="text" id="auth-phone" placeholder="Mobile Number (10 digits)" maxlength="10" required>
+                    <input type="password" id="auth-password" placeholder="Password" required>
+                    <button type="submit" class="btn-primary">Login</button>
+                    <button type="button" id="btn-to-signup" class="btn-secondary" style="margin-top: 10px; border: none; background: transparent; color: var(--primary);">New user? Create an Account</button>
+                    <button type="button" id="btn-guest" class="btn-secondary">Continue as Guest</button>
+                    <button type="button" id="btn-admin-demo" class="btn-secondary" style="border: none; margin-top: 5px; color:#555; text-decoration: underline; font-size:14px;">🛠️ Secure Admin Portal</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Signup View -->
+        <section id="view-signup" class="view">
+            <div class="auth-box">
+                <div class="logo">🏙️ SmartCity</div>
+                <h2>Create Account</h2>
+                <p>Join to report issues</p>
+                <form id="signup-form">
+                    <input type="text" id="signup-name" placeholder="Full Name" required>
+                    <input type="text" id="signup-phone" placeholder="Mobile Number (10 digits)" maxlength="10" required>
+                    <input type="password" id="signup-password" placeholder="Password" required>
+                    <small style="display:block; margin:-10px 0 15px 5px; color:#666; font-size:11px;">Min 8 chars, 1 uppercase, 1 lowercase, 1 special char</small>
+                    <button type="submit" class="btn-primary">Sign Up</button>
+                    <button type="button" id="btn-to-login" class="btn-secondary" style="margin-top: 10px; border: none; background: transparent; color: var(--primary);">Already have an account? Login</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Dashboard View -->
+        <section id="view-dashboard" class="view">
+            <header>
+                <h2>My Complaints</h2>
+                <div class="header-actions">
+                    <button id="btn-to-admin" class="btn-icon" style="display:none;">🛡️</button>
+                    <button class="btn-icon" data-target="view-profile">👤</button>
+                </div>
+            </header>
+            <div style="padding: 16px 24px 0; background: #fdfdfd;">
+                <h3 style="font-size: 14px; color: var(--text-muted); font-weight: 500;">Total Uploaded: <strong id="complaint-count" style="color: var(--primary); font-size: 16px;">0</strong></h3>
+            </div>
+            <div class="filters">
+                <button class="filter active" data-filter="All">All</button>
+                <button class="filter" data-filter="Pending">Pending</button>
+                <button class="filter" data-filter="Resolved">Solved</button>
+            </div>
+            <div id="complaint-list" class="scroll-area">
+                <!-- Cards injected here -->
+            </div>
+            
+            <nav class="bottom-nav">
+                <button class="nav-item active" data-target="view-dashboard">🏠<span>Home</span></button>
+                <button class="nav-item" data-target="view-analytics">📊<span>Stats</span></button>
+                <button class="nav-item btn-fab" data-target="view-report">➕</button>
+                <button class="nav-item" data-target="view-map">🗺️<span>Map</span></button>
+            </nav>
+        </section>
+        
+        <!-- Analytics View -->
+        <section id="view-analytics" class="view">
+            <header>
+                <h2>City Insights</h2>
+            </header>
+            <div class="scroll-area">
+                <div class="card" style="margin-top: 10px;">
+                    <h3 style="text-align: center; margin-bottom: 20px; font-size: 16px; color: var(--text-main);">Complaint Categories</h3>
+                    <canvas id="categoryChart"></canvas>
+                </div>
+                <div class="card">
+                    <h3 style="text-align: center; margin-bottom: 20px; font-size: 16px; color: var(--text-main);">Resolution Status</h3>
+                    <canvas id="statusChart"></canvas>
+                </div>
+            </div>
+            <nav class="bottom-nav">
+                <button class="nav-item" data-target="view-dashboard">🏠<span>Home</span></button>
+                <button class="nav-item active" data-target="view-analytics">📊<span>Stats</span></button>
+                <button class="nav-item btn-fab" data-target="view-report">➕</button>
+                <button class="nav-item" data-target="view-map">🗺️<span>Map</span></button>
+            </nav>
+        </section>
+
+        <!-- Profile View -->
+        <section id="view-profile" class="view">
+            <header>
+                <button class="btn-back" data-target="view-dashboard">⬅</button>
+                <h2>My Profile</h2>
+                <div style="width:24px"></div>
+            </header>
+            <div class="scroll-area form-area" style="padding-top: 30px;">
+                <div style="text-align: center; margin-bottom: 10px;">
+                    <div style="width: 80px; height: 80px; background: var(--primary); color: white; border-radius: 40px; display: flex; align-items: center; justify-content: center; font-size: 32px; margin: 0 auto 15px;">👤</div>
+                    <h3 id="profile-name" style="font-size: 20px;">Name</h3>
+                    <p id="profile-phone" style="color: var(--text-muted); margin-top: 5px;">Phone number</p>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <h4 style="border-bottom: 1px solid #eee; padding-bottom: 8px; margin-bottom: 10px; font-weight: 600;">My Complaints (<span id="profile-count">0</span>)</h4>
+                    <div id="profile-complaint-list"></div>
+                </div>
+
+                <button id="btn-logout" class="btn-secondary" style="border-color: #dc2626; color: #dc2626; width: 100%;">Log Out</button>
+            </div>
+        </section>
+
+        <!-- Report Issue View -->
+        <section id="view-report" class="view">
+            <header>
+                <button class="btn-back" data-target="view-dashboard">⬅</button>
+                <h2>Report Issue</h2>
+                <div style="width:24px"></div>
+            </header>
+            <div class="scroll-area form-area">
+                <form id="report-form">
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" id="report-title" placeholder="E.g., Pothole on Main St" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Description (Be specific)</label>
+                        <textarea id="report-desc" rows="4" placeholder="Describe the issue... AI will auto-categorize it!" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Photo</label>
+                        <div class="file-upload">
+                            <input type="file" id="report-image" accept="image/*">
+                            <span>📸 Tap to upload photo</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Location</label>
+                        <button type="button" id="btn-location" class="btn-secondary">📍 Detect My Location</button>
+                        <small id="location-text">Not detected</small>
+                        <input type="hidden" id="report-lat">
+                        <input type="hidden" id="report-lng">
+                    </div>
+                    <button type="submit" class="btn-primary" id="btn-submit-report">Submit Complaint</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Map View -->
+        <section id="view-map" class="view">
+            <header>
+                <h2>City Map</h2>
+            </header>
+            <div id="map"></div>
+            <nav class="bottom-nav">
+                <button class="nav-item" data-target="view-dashboard">🏠<span>Home</span></button>
+                <button class="nav-item" data-target="view-analytics">📊<span>Stats</span></button>
+                <button class="nav-item btn-fab" data-target="view-report">➕</button>
+                <button class="nav-item active" data-target="view-map">🗺️<span>Map</span></button>
+            </nav>
+        </section>
+
+        <!-- Admin Login View -->
+        <section id="view-admin-login" class="view">
+            <div class="auth-box" style="background: linear-gradient(135deg, #1e293b, #0f172a);">
+                <div class="logo" style="color: #60a5fa;">🛡️ System Override</div>
+                <h2 style="color: white;">Staff Portal</h2>
+                <p style="color: #94a3b8;">Authorized department personnel only</p>
+                <form id="admin-login-form">
+                    <input type="text" id="admin-phone" placeholder="Enter Admin Mobile" maxlength="10" required>
+                    <input type="password" id="admin-password" placeholder="Passkey" required>
+                    <button type="submit" class="btn-primary" style="background:#2563eb;">Authenticate Access</button>
+                    <button type="button" id="btn-to-user-login" class="btn-secondary" style="margin-top: 10px; border: none; background: transparent; color: #cbd5e1;">⬅ Return to Citizen Portal</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Admin View -->
+        <section id="view-admin" class="view">
+            <header>
+                <button class="btn-back" data-target="view-dashboard">⬅</button>
+                <h2>Admin Panel</h2>
+                <div style="width:24px"></div>
+            </header>
+            <div id="admin-list" class="scroll-area">
+                <!-- Admin Cards injected here -->
+            </div>
+        </section>
+
+        <!-- Detail Modal -->
+        <div id="complaint-modal" class="modal-overlay">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal()">✕</button>
+                <h2 id="mc-title" style="margin-bottom: 5px; padding-right: 40px; line-height: 1.2;">Title</h2>
+                <p id="mc-desc" style="color: var(--text-muted); font-size: 14px; margin-bottom: 20px;">Desc</p>
+                
+                <h3>Status Timeline</h3>
+                <div id="mc-timeline" class="timeline"></div>
+
+                <div style="margin-top:20px; display:flex; justify-content:space-between; align-items:center; border-top: 1px solid #eee; padding-top:20px;">
+                    <h3>Comments</h3>
+                    <div style="font-size:14px; color:#888;">👍 <span id="mc-upvotes">0</span> Supports</div>
+                </div>
+
+                <div id="mc-comments" class="comment-section"></div>
+                
+                <div class="comment-input-area">
+                    <input type="text" id="comment-input" placeholder="Add a public comment...">
+                    <input type="hidden" id="current-modal-id">
+                    <button onclick="postComment()">Send</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toast Notification -->
+        <div id="toast" class="toast">Successfully completed!</div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
